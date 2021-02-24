@@ -101,6 +101,7 @@ import net.sf.l2j.gameserver.taskmanager.ShadowItemTaskManager;
 import net.sf.l2j.gameserver.taskmanager.WaterTaskManager;
 import net.sf.l2j.util.DeadLockDetector;
 import net.sf.l2j.util.IPv4Filter;
+import net.sf.l2j.gameserver.data.sql.OfflineTradersTable;
 
 public class GameServer
 {
@@ -176,6 +177,10 @@ public class GameServer
 		PetitionManager.getInstance();
 		
 		StringUtil.printSection("Characters");
+		
+		if ((Config.OFFLINE_TRADE_ENABLE || Config.OFFLINE_CRAFT_ENABLE) && Config.RESTORE_OFFLINERS)
+			OfflineTradersTable.restoreOfflineTraders();
+		
 		PlayerData.getInstance();
 		PlayerInfoTable.getInstance();
 		PlayerLevelData.getInstance();

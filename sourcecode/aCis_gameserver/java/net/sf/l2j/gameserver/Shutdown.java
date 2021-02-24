@@ -18,6 +18,7 @@ import net.sf.l2j.gameserver.data.manager.PetitionManager;
 import net.sf.l2j.gameserver.data.manager.RaidBossManager;
 import net.sf.l2j.gameserver.data.manager.SevenSignsManager;
 import net.sf.l2j.gameserver.data.manager.ZoneManager;
+import net.sf.l2j.gameserver.data.sql.OfflineTradersTable;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.Player;
 import net.sf.l2j.gameserver.model.olympiad.Olympiad;
@@ -78,6 +79,18 @@ public class Shutdown extends Thread
 		{
 			StringUtil.printSection("Under " + MODE_TEXT[_shutdownMode] + " process");
 			
+			
+			// offline shop
+			 try
+			 {
+			      if ((Config.OFFLINE_TRADE_ENABLE || Config.OFFLINE_CRAFT_ENABLE) && Config.RESTORE_OFFLINERS)
+			         OfflineTradersTable.storeOffliners();
+			 }
+			 catch (Throwable t)
+			 	{
+			    }
+			 
+			 
 			// disconnect players
 			try
 			{

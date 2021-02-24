@@ -35,6 +35,22 @@ public final class Config
 	public static final String PLAYERS_FILE = "./config/players.properties";
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
+	public static final String OFFLINE_FILE = "./config/offlineshop.properties";
+	
+	// --------------------------------------------------
+	// Offline
+	// --------------------------------------------------
+   
+	public static boolean OFFLINE_TRADE_ENABLE;
+	public static boolean OFFLINE_CRAFT_ENABLE;
+	public static boolean OFFLINE_MODE_IN_PEACE_ZONE;
+	public static boolean OFFLINE_MODE_NO_DAMAGE;
+	public static boolean RESTORE_OFFLINERS;
+	public static int OFFLINE_MAX_DAYS;
+	public static boolean OFFLINE_DISCONNECT_FINISHED;
+	public static boolean OFFLINE_SET_NAME_COLOR;
+	public static int OFFLINE_NAME_COLOR;
+	
 	
 	// --------------------------------------------------
 	// Clans settings
@@ -641,6 +657,26 @@ public final class Config
 		
 		return result;
 	}
+	
+	
+	/**
+    * Loads offline shop settings
+    */
+   private static final void loadOfflineShop()
+   {
+       final ExProperties offline = initProperties(OFFLINE_FILE);
+       OFFLINE_TRADE_ENABLE = offline.getProperty("OfflineTradeEnable", false);
+       OFFLINE_CRAFT_ENABLE = offline.getProperty("OfflineCraftEnable", false);
+       OFFLINE_MODE_IN_PEACE_ZONE = offline.getProperty("OfflineModeInPeaceZone", false);
+       OFFLINE_MODE_NO_DAMAGE = offline.getProperty("OfflineModeNoDamage", false);
+       OFFLINE_SET_NAME_COLOR = offline.getProperty("OfflineSetNameColor", false);
+       OFFLINE_NAME_COLOR = Integer.decode("0x" + offline.getProperty("OfflineNameColor", "808080"));
+       RESTORE_OFFLINERS = offline.getProperty("RestoreOffliners", false);
+       OFFLINE_MAX_DAYS = offline.getProperty("OfflineMaxDays", 10);
+       OFFLINE_DISCONNECT_FINISHED = offline.getProperty("OfflineDisconnectFinished", true);
+	}
+   
+	
 	
 	/**
 	 * Loads clan and clan hall settings.
@@ -1290,11 +1326,16 @@ public final class Config
 		// players settings
 		loadPlayers();
 		
+		// offline settings
+		loadOfflineShop();
+		
 		// siege settings
 		loadSieges();
 		
 		// server settings
 		loadServer();
+		
+		
 	}
 	
 	public static final void loadLoginServer()

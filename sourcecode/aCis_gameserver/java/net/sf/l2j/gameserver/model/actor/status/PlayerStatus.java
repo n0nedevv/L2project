@@ -10,6 +10,7 @@ import net.sf.l2j.gameserver.data.manager.ZoneManager;
 import net.sf.l2j.gameserver.data.xml.PlayerLevelData;
 import net.sf.l2j.gameserver.enums.StatusType;
 import net.sf.l2j.gameserver.enums.ZoneId;
+import net.sf.l2j.gameserver.enums.actors.OperateType;
 import net.sf.l2j.gameserver.enums.actors.ClassRace;
 import net.sf.l2j.gameserver.enums.skills.EffectType;
 import net.sf.l2j.gameserver.enums.skills.Stats;
@@ -95,6 +96,10 @@ public class PlayerStatus extends PlayableStatus<Player>
 	{
 		if (_actor.isDead())
 			return;
+			
+		// If OFFLINE_MODE_NO_DAMAGE is enabled and player is offline and he is in store/craft mode, no damage is taken.
+		if (Config.OFFLINE_MODE_NO_DAMAGE && (_actor.getClient() != null) && _actor.getClient().isDetached() && ((Config.OFFLINE_TRADE_ENABLE && ((_actor.getOperateType() == OperateType.SELL) || (_actor.getOperateType() == OperateType.BUY))) || (Config.OFFLINE_CRAFT_ENABLE && (_actor.isCrafting() || (_actor.getOperateType() == OperateType.MANUFACTURE)))))
+			return;	
 		
 		// invul handling
 		if (_actor.isInvul())
@@ -516,6 +521,9 @@ public class PlayerStatus extends PlayableStatus<Player>
 		
 		return true;
 	}
+	
+	
+	
 	
 	/**
 	 * Add Experience and SP rewards to the Player, remove its Karma (if necessary) and Launch increase level task.

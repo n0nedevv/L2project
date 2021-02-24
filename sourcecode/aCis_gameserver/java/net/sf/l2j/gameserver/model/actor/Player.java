@@ -350,7 +350,7 @@ public final class Player extends Playable
 	
 	private final TradeList _buyList = new TradeList(this);
 	private final TradeList _sellList = new TradeList(this);
-	private final ManufactureList _manufactureList = new ManufactureList();
+	private ManufactureList _manufactureList = new ManufactureList();
 	
 	private PreparedListContainer _currentMultiSell;
 	
@@ -2243,8 +2243,17 @@ public final class Player extends Playable
 	
 	public String getAccountName()
 	{
+		if (getClient() == null)
+           return getAccountNamePlayer();
+		
 		return _accountName;
 	}
+	
+	 public String getAccountNamePlayer()
+	{
+       return _accountName;
+	}
+	
 	
 	public Map<Integer, String> getAccountChars()
 	{
@@ -3262,6 +3271,13 @@ public final class Player extends Playable
 	{
 		return _manufactureList;
 	}
+	
+	
+	public void setManufactureList(ManufactureList type)
+	{
+		_manufactureList = type;
+	}
+	
 	
 	/**
 	 * @return The {@link OperateType} of this {@link Player}.
@@ -7380,4 +7396,19 @@ public final class Player extends Playable
 		
 		return gms;
 	}
+	
+
+   private long _offlineShopStart;
+   
+   public long getOfflineStartTime()
+   {
+       return _offlineShopStart;
+   }
+   
+   public void setOfflineStartTime(long time)
+   {
+       _offlineShopStart = time;
+   }
+ 
+	
 }

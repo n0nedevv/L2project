@@ -29,6 +29,9 @@ import net.sf.l2j.gameserver.model.pledge.Clan;
 import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket;
 import net.sf.l2j.gameserver.network.serverpackets.ServerClose;
+import net.sf.l2j.gameserver.data.sql.OfflineTradersTable;
+import net.sf.l2j.gameserver.enums.MessageType;
+import net.sf.l2j.gameserver.model.olympiad.OlympiadManager;
 
 /**
  * Represents a client connected on Game Server.<br>
@@ -209,6 +212,28 @@ public final class GameClient extends MMOClient<MMOConnection<GameClient>> imple
 				if (getPlayer() != null && !isDetached())
 				{
 					setDetached(true);
+					if (OfflineTradersTable.offlineMode(getPlayer()))
+						{
+						if (getPlayer().getParty() != null)
+							getPlayer().getParty().removePartyMember(getPlayer(), MessageType.DISCONNECTED);
+						                       
+						OlympiadManager.getInstance().unRegisterNoble(getPlayer());
+					                       
+						                       if (getPlayer().getSummon() != null)
+						                       {
+						                    	   getPlayer().getSummon().doRevive();
+						                    	   getPlayer().getSummon().unSummon(getPlayer());
+						                       }
+						                       
+						                       if (Config.OFFLINE_SET_NAME_COLOR)
+						                    	   getPlayer().broadcastUserInfo();
+						                       
+						                       if (getPlayer().getOfflineStartTime() == 0)
+						                    	   getPlayer().setOfflineStartTime(System.currentTimeMillis());
+						                       
+						                       return;
+						                   }
+					
 					fast = !getPlayer().isInCombat() && !getPlayer().isLocked();
 				}
 				cleanMe(fast);
@@ -581,6 +606,9 @@ public final class GameClient extends MMOClient<MMOConnection<GameClient>> imple
 	
 	public void close(L2GameServerPacket gsp)
 	{
+		if (getConnection() == null)
+			return;
+		
 		getConnection().close(gsp);
 	}
 	

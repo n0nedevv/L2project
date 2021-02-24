@@ -2,7 +2,6 @@ package net.sf.l2j.gameserver.handler.itemhandlers;
 
 import net.sf.l2j.commons.random.Rnd;
 
-+import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.enums.items.ShotType;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.model.actor.Playable;
@@ -15,10 +14,6 @@ import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
 
 public class SoulShots implements IItemHandler
 {
-	private static final int MANA_POT_CD = 2,
-		HEALING_POT_CD = 11, // Menos de 11 dá erro, possivel foda monumental
-		CP_POT_CD = 2;
-	
 	@Override
 	public void useItem(Playable playable, ItemInstance item, boolean forceUse)
 	{
