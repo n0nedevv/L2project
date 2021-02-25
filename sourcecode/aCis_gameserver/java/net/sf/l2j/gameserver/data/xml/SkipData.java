@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import net.sf.l2j.gameserver.xmlfactory.XMLDocumentFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
 
 public class SkipData
 {
@@ -31,7 +32,10 @@ public class SkipData
 		try
 		{
 			File f = new File("./data/xml/skipping_items.xml");
-			Document doc = XMLDocumentFactory.getInstance().loadDocument(f);
+		    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		    Document doc = dBuilder.parse(f);
+
 			
 			Node n = doc.getFirstChild();
 			for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling())
@@ -45,10 +49,10 @@ public class SkipData
 		}
 		catch (Exception e)
 		{
-			_log.warning("SkipTable: Error parsing SkipItems.xml "  e);
+			_log.warning("SkipTable: Error parsing SkipItems.xml " + e);
 		}
 		
-		_log.info("SkipTable: Loaded "  _skip.size()  " skipping item(s).");
+		_log.info("SkipTable: Loaded " + _skip.size() + " skipping item(s).");
 	}
 	
 	public static boolean isSkipped(int itemId)

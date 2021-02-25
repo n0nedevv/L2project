@@ -103,7 +103,7 @@ public class NpcData implements IXmlReader
 						}
 						
 						if (Config.ENABLE_SKIPPING && SkipData.isSkipped(data.getItemId()))
-							continue;
+							return;
 						
 						category.addDropData(data, isRaid);
 					});
