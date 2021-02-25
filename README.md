@@ -1,4 +1,4 @@
-# L2project - TODO
+# L2project - Objectives
 
 Class Manager NPC ✔
 
@@ -21,3 +21,14 @@ Trade of Augment Items permit
 Seven Signs curse disable
 
 Offline Shops  ✔
+
+Class balancement
+
+Add cool Cloaks
+
+Quest rate rework
+
+PI and MOS rework
+
+Black Market NPC
+

@@ -1,0 +1,1 @@
+DELETE FROM droplist WHERE itemid IN (SELECT item_id FROM etcitem WHERE item_type= 'spellbook' );
