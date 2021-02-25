@@ -635,6 +635,9 @@ public final class Config
 	public static int CLIENT_PACKET_QUEUE_MAX_UNDERFLOWS_PER_MIN = 1; // default 1
 	public static int CLIENT_PACKET_QUEUE_MAX_UNKNOWN_PER_MIN = 5; // default 5
 	
+	/** Skipped Drop */
+	public static boolean ENABLE_SKIPPING;
+	
 	// --------------------------------------------------
 	
 	/**
@@ -985,7 +988,8 @@ public final class Config
 		MIN_NPC_ANIMATION = npcs.getProperty("MinNPCAnimation", 20);
 		MAX_NPC_ANIMATION = npcs.getProperty("MaxNPCAnimation", 40);
 		MIN_MONSTER_ANIMATION = npcs.getProperty("MinMonsterAnimation", 10);
-		MAX_MONSTER_ANIMATION = npcs.getProperty("MaxMonsterAnimation", 40);
+		MAX_MONSTER_ANIMATION = npcs.getProperty("MaxMonsterAnimation", 40);		
+		ENABLE_SKIPPING = npcs.getProperty("EnableSkippingItems", true);
 	}
 	
 	/**

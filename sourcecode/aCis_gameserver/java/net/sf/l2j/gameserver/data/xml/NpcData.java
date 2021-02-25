@@ -20,6 +20,7 @@ import net.sf.l2j.gameserver.model.actor.template.PetTemplate;
 import net.sf.l2j.gameserver.model.item.DropCategory;
 import net.sf.l2j.gameserver.model.item.DropData;
 import net.sf.l2j.gameserver.skills.L2Skill;
+import net.sf.l2j.Config;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -100,6 +101,10 @@ public class NpcData implements IXmlReader
 							LOGGER.warn("Droplist data for undefined itemId: {}.", data.getItemId());
 							return;
 						}
+						
+						if (Config.ENABLE_SKIPPING && SkipData.isSkipped(data.getItemId()))
+							continue;
+						
 						category.addDropData(data, isRaid);
 					});
 					drops.add(category);

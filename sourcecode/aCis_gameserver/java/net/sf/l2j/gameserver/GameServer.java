@@ -47,6 +47,7 @@ import net.sf.l2j.gameserver.data.sql.BookmarkTable;
 import net.sf.l2j.gameserver.data.sql.ClanTable;
 import net.sf.l2j.gameserver.data.sql.PlayerInfoTable;
 import net.sf.l2j.gameserver.data.sql.ServerMemoTable;
+import net.sf.l2j.gameserver.data.xml.SkipData;
 import net.sf.l2j.gameserver.data.sql.SpawnTable;
 import net.sf.l2j.gameserver.data.xml.AdminData;
 import net.sf.l2j.gameserver.data.xml.AnnouncementData;
@@ -170,6 +171,7 @@ public class GameServer
 		SoulCrystalData.getInstance();
 		AugmentationData.getInstance();
 		CursedWeaponManager.getInstance();
+		SkipData.getInstance();
 		
 		StringUtil.printSection("Admins");
 		AdminData.getInstance();
