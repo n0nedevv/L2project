@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
+import net.sf.l2j.gameserver.model.holder.BuffSkillHolder;
+
 
 import net.sf.l2j.commons.config.ExProperties;
 import net.sf.l2j.commons.logging.CLogger;
@@ -447,6 +449,26 @@ public final class Config
 	public static boolean ES_SP_BOOK_NEEDED;
 	public static boolean DIVINE_SP_BOOK_NEEDED;
 	public static boolean SUBCLASS_WITHOUT_QUESTS;
+	
+	/** Buffer */
+	public static String PFIGHTER_SET;
+	public static int[] PFIGHTER_SET_LIST;
+	public static String PMAGE_SET;
+	public static int[] PMAGE_SET_LIST;
+	public static int PBUFFER_MAX_SCHEMES;
+	public static int PBUFFER_MAX_SKILLS;
+	public static int PBUFFER_STATIC_BUFF_COST;
+	public static String PBUFFER_BUFFS;
+	public static Map<Integer, BuffSkillHolder> PBUFFER_BUFFLIST;
+	
+	public static List<Integer> PFIGHTER_SKILL_LIST;
+	public static List<Integer> PMAGE_SKILL_LIST;
+	
+	public static boolean PRESTRICT_USE_BUFFER_ON_PVPFLAG;
+	public static boolean PRESTRICT_USE_BUFFER_IN_COMBAT;
+	
+	public static int PVOTE_BUFF_ITEM_ID;
+	public static int PVOTE_BUFF_ITEM_COUNT;
 	
 	/** Buffs */
 	public static boolean STORE_SKILL_COOLTIME;
@@ -1117,6 +1139,48 @@ public final class Config
 		
 		MAX_BUFFS_AMOUNT = players.getProperty("MaxBuffsAmount", 20);
 		STORE_SKILL_COOLTIME = players.getProperty("StoreSkillCooltime", true);
+		
+		MAX_BUFFS_AMOUNT = players.getProperty("MaxBuffsAmount", 20);
+		STORE_SKILL_COOLTIME = players.getProperty("StoreSkillCooltime", true);
+
+		PBUFFER_MAX_SCHEMES = players.getProperty("BufferMaxSchemesPerChar", 4);
+		PBUFFER_MAX_SKILLS = players.getProperty("BufferMaxSkillsPerScheme", 24);
+		PBUFFER_STATIC_BUFF_COST = players.getProperty("BufferStaticCostPerBuff", -1);
+		PBUFFER_BUFFS = players.getProperty("BufferBuffs");
+
+		PFIGHTER_SET = players.getProperty("FighterSet", "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650");
+		PMAGE_SET = players.getProperty("MageSet", "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650");
+
+		String[] FighterList = PFIGHTER_SET.split(",");
+		PFIGHTER_SET_LIST = new int[FighterList.length];
+		for (int i = 0; i < FighterList.length; i++)
+			PFIGHTER_SET_LIST[i] = Integer.parseInt(FighterList[i]);
+
+		String[] MageList = PMAGE_SET.split(",");
+		PMAGE_SET_LIST = new int[MageList.length];
+		for (int i = 0; i < MageList.length; i++)
+			PMAGE_SET_LIST[i] = Integer.parseInt(MageList[i]);
+
+		PBUFFER_BUFFLIST = new HashMap<>();
+		for (String skillInfo : PBUFFER_BUFFS.split(";"))
+		{
+			final String[] infos = skillInfo.split(",");
+			PBUFFER_BUFFLIST.put(Integer.valueOf(infos[0]), new BuffSkillHolder(Integer.valueOf(infos[0]), 0, Integer.valueOf(infos[1]), infos[2], skillInfo));
+		}
+
+		PRESTRICT_USE_BUFFER_ON_PVPFLAG = players.getProperty("RestrictUseBufferOnPvPFlag", true);
+		PRESTRICT_USE_BUFFER_IN_COMBAT = players.getProperty("RestrictUseBufferInCombat", true);
+
+		PVOTE_BUFF_ITEM_ID = players.getProperty("VoteBuffItemId", 57);
+		PVOTE_BUFF_ITEM_COUNT = players.getProperty("VoteBuffItemCount", 1);
+
+		PFIGHTER_SKILL_LIST = new ArrayList<>();
+		for (String skill_id : players.getProperty("FighterSkillList", "").split(";"))
+			PFIGHTER_SKILL_LIST.add(Integer.parseInt(skill_id));
+
+		PMAGE_SKILL_LIST = new ArrayList<>();
+		for (String skill_id : players.getProperty("MageSkillList", "").split(";"))
+			PMAGE_SKILL_LIST.add(Integer.parseInt(skill_id));
 	}
 	
 	/**

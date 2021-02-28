@@ -2,11 +2,11 @@
 
 Class Manager NPC ✔
 
-Buffer 
+Buffer  (Doesn't replace buffs (per ex COV-POW), Main HTML to modify
 
 Vote System 
 
-Global GK NPC
+Global GK NPC ✔
 
 GM SHOP
 
@@ -31,4 +31,10 @@ Quest rate rework
 PI and MOS rework
 
 Black Market NPC
+
+Weekly Voted Event
+
+Spellbook/Amulet drop removal ✔
+
+Fishing special hour 'Maré Alta'
 
