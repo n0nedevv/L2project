@@ -295,12 +295,12 @@ public class LoginServerThread extends Thread
 	public void addClient(String account, GameClient client)
 	{
 		final GameClient existingClient = _clients.putIfAbsent(account, client);
-		if (existingClient == null)
-		{
-			
-			if (client.isDetached())
+		
+		if (client.isDetached())
                return;
-			
+		
+		if (existingClient == null)
+		{									
 			try
 			{
 				sendPacket(new PlayerAuthRequest(client.getAccountName(), client.getSessionId()));
