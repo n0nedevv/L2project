@@ -74,15 +74,15 @@
 			<skill id="4416" level="16"/>
 		</skills>
 	</npc>
-	<npc id="50008" idTemplate="30519" name="Tryskell" title="Crappy Buffer">
+	<npc id="50008" idTemplate="9003" name="Buffer" title="Supporter">
 		<set name="usingServerSideName" val="true"/>
 		<set name="usingServerSideTitle" val="true"/>
 		<set name="level" val="70"/>
 		<set name="radius" val="7"/>
-		<set name="height" val="18"/>
+		<set name="height" val="22"/>
 		<set name="rHand" val="0"/>
 		<set name="lHand" val="0"/>
-		<set name="type" val="SchemeBuffer"/>
+		<set name="type" val="PlayerBuffer"/>
 		<set name="exp" val="0"/>
 		<set name="sp" val="0"/>
 		<set name="hp" val="2444.46819"/>
@@ -95,7 +95,7 @@
 		<set name="mDef" val="216.53847"/>
 		<set name="crit" val="4"/>
 		<set name="atkSpd" val="253"/>
-		<set name="str" val="40"/>
+		<set name="str" val="40"/>	
 		<set name="int" val="21"/>
 		<set name="dex" val="30"/>
 		<set name="wit" val="20"/>
