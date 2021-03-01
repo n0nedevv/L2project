@@ -1,40 +1,26 @@
-# L2project - Objectives
+# L2Project
 
-Class Manager NPC ✔
+L2J Acis based modified by n0nedevv, bogascorp and naitos.
 
-Buffer  (Doesn't replace buffs (per ex COV-POW), Main HTML to modify
 
-Vote System 
+## Development
 
-Global GK NPC ✔
+[TODO](./txtfiles/TODO.md)
 
-GM SHOP
+[ChangeList](./txtfiles/ChangeList.md)
 
-Enchant Skill in Skills Tab or a beautiful Enchant Skill NPC
 
-Auto Potions (HP/MP/CP) ✔
 
-Clan List
+## Installation
 
-Trade of Augment Items permit
+Requires JDK 11, MariaDB with HeidiSQL, Eclipse IDE.
 
-Seven Signs curse disable
+After cloning/downloading repository:
 
-Offline Shops  ✔
+[Importing the project from files](https://www.youtube.com/watch?v=TeYiMJasJmE&feature=emb_title)
 
-Class balancement
+[Project compilation and configuration](https://www.youtube.com/watch?v=2gCdSd7ZLxI&feature=emb_title)
 
-Add cool Cloaks
 
-Quest rate rework
-
-PI and MOS rework
-
-Black Market NPC
-
-Weekly Voted Event
-
-Spellbook/Amulet drop removal ✔
-
-Fishing special hour 'Maré Alta'
-
+## Download
+[System](https://we.tl/t-VmkF8tuFEs)

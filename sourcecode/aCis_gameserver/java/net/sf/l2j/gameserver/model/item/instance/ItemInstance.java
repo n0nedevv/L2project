@@ -501,6 +501,7 @@ public final class ItemInstance extends WorldObject implements Runnable, Compara
 	/**
 	 * @return if item is tradable
 	 */
+	@SuppressWarnings("static-method")
 	public boolean isTradable()
 	{
 		//return isAugmented() ? false : _item.isTradable();
@@ -510,6 +511,7 @@ public final class ItemInstance extends WorldObject implements Runnable, Compara
 	/**
 	 * @return if item is sellable.
 	 */
+	@SuppressWarnings("static-method")
 	public boolean isSellable()
 	{
 		//return isAugmented() ? true : _item.isSellable();
