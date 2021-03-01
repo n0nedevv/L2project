@@ -3361,8 +3361,10 @@ public final class Player extends Playable
 	{
 		// We reward all skills to the players, but don't store autoGet skills on the database.
 		for (final GeneralSkillNode skill : getAllAvailableSkills())
+			if (skill.getId() == L2Skill.SKILL_DIVINE_INSPIRATION)
+				continue;
 			addSkill(skill.getSkill(), skill.getCost() != 0);
-		
+						
 		// Remove the Lucky skill if level superior to 10.
 		if (getStatus().getLevel() >= 10 && hasSkill(L2Skill.SKILL_LUCKY))
 			removeSkill(L2Skill.SKILL_LUCKY, false);
