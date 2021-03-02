@@ -61,7 +61,7 @@ public class CastleManagersVCMD implements IVoicedCommandHandler
        
        private static void sendHtml(Player player)
        {
-               String htmFile = "data/html/mods/CastleManager.htm";
+               String htmFile = "data/html/mods/menu/CastleManager.htm";
               
                NpcHtmlMessage msg = new NpcHtmlMessage(5);
                msg.setFile(htmFile);
