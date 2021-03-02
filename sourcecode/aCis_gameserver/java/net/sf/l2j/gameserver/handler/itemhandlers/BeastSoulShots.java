@@ -56,6 +56,7 @@ public class BeastSoulShots implements IItemHandler
 		
 		player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.PET_USES_S1).addItemName(item.getItemId()));
 		summon.setChargedShot(ShotType.SOULSHOT, true);
-		player.broadcastPacketInRadius(new MagicSkillUse(summon, summon, 2033, 1, 0, 0), 600);
+		if(!player.isSSDisabled())
+			player.broadcastPacketInRadius(new MagicSkillUse(summon, summon, 2033, 1, 0, 0), 600);
 	}
 }

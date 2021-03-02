@@ -5,9 +5,9 @@ L2J Acis based modified by n0nedevv, bogascorp and naitos.
 
 ## Development
 
-[TODO](txtfiles/TODO.md)
+[TODO](txtfiles/todo/readme.md)
 
-[ChangeList](txtfiles/ChangeList.md)
+[ChangeList](txtfiles/changelist/readme.md)
 
 
 

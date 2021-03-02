@@ -82,6 +82,12 @@ public final class TradeRequest extends L2GameClientPacket
 			return;
 		}
 		
+		if (target.isInTradeProt())
+		{
+				player.sendMessage(target.getName() + " is in Trade Protection Mode");
+				return;
+		}
+		
 		if (target.getBlockList().isInBlockList(player))
 		{
 			player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_HAS_ADDED_YOU_TO_IGNORE_LIST).addCharName(target));

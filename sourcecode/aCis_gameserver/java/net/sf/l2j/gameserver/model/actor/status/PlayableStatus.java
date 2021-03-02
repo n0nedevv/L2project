@@ -70,6 +70,10 @@ public class PlayableStatus<T extends Playable> extends CreatureStatus<T>
 	
 	public boolean addExp(long value)
 	{
+		if(_actor.getActingPlayer().cantGainXP()) {
+			return false;
+		}
+		
 		if ((getExp() + value) < 0)
 			return true;
 		

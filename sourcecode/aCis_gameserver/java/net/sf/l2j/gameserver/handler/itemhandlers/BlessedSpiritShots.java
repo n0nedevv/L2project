@@ -57,6 +57,7 @@ public class BlessedSpiritShots implements IItemHandler
 		
 		player.sendPacket(SystemMessageId.ENABLED_SPIRITSHOT);
 		player.setChargedShot(ShotType.BLESSED_SPIRITSHOT, true);
-		player.broadcastPacketInRadius(new MagicSkillUse(player, player, skills[0].getId(), 1, 0, 0), 600);
+		if (!player.isSSDisabled())
+			player.broadcastPacketInRadius(new MagicSkillUse(player, player, skills[0].getId(), 1, 0, 0), 600);
 	}
 }

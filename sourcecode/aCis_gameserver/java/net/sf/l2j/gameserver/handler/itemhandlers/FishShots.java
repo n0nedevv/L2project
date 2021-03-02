@@ -46,6 +46,7 @@ public class FishShots implements IItemHandler
 		final IntIntHolder[] skills = item.getItem().getSkills();
 		
 		player.setChargedShot(ShotType.FISH_SOULSHOT, true);
-		player.broadcastPacket(new MagicSkillUse(player, skills[0].getId(), 1, 0, 0));
+		if(!player.isSSDisabled())	
+			player.broadcastPacket(new MagicSkillUse(player, skills[0].getId(), 1, 0, 0));
 	}
 }

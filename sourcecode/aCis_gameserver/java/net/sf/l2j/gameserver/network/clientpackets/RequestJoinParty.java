@@ -70,6 +70,12 @@ public final class RequestJoinParty extends L2GameClientPacket
 			return;
 		}
 		
+		if (target.isPartyInvProt())
+		{
+			requestor.sendMessage("You can't invite that player because he is in party protection.");
+			return;
+		}
+		
 		if (target.isInOlympiadMode() || requestor.isInOlympiadMode())
 			return;
 		
