@@ -38,6 +38,7 @@ public final class Config
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
 	public static final String OFFLINE_FILE = "./config/offlineshop.properties";
+	public static final String CUSTOM_FILE = "./config/custom.properties";
 	
 	// --------------------------------------------------
 	// Offline
@@ -657,6 +658,17 @@ public final class Config
 	public static int CLIENT_PACKET_QUEUE_MAX_UNDERFLOWS_PER_MIN = 1; // default 1
 	public static int CLIENT_PACKET_QUEUE_MAX_UNKNOWN_PER_MIN = 5; // default 5
 	
+ 	// --------------------------------------------------
+	// Custom settings
+	// --------------------------------------------------
+	
+	public static int RAID_BOSS_INFO_PAGE_LIMIT;
+	public static int RAID_BOSS_DROP_PAGE_LIMIT;
+	public static String RAID_BOSS_DATE_FORMAT;
+	public static String RAID_BOSS_IDS;
+	public static List<Integer> LIST_RAID_BOSS_IDS;
+	
+	
 	/** Skipped Drop */
 	public static boolean ENABLE_SKIPPING;
 	
@@ -779,6 +791,19 @@ public final class Config
 		CH_FRONT_FEE_RATIO = clans.getProperty("ClanHallFrontPlatformFunctionFeeRatio", 86400000);
 		CH_FRONT1_FEE = clans.getProperty("ClanHallFrontPlatformFunctionFeeLvl1", 3031);
 		CH_FRONT2_FEE = clans.getProperty("ClanHallFrontPlatformFunctionFeeLvl2", 9331);
+		
+		ExProperties custom = initProperties(CUSTOM_FILE);
+		RAID_BOSS_INFO_PAGE_LIMIT = custom.getProperty("RaidBossInfoPageLimit", 15);
+		RAID_BOSS_DROP_PAGE_LIMIT = custom.getProperty("RaidBossDropPageLimit", 15);
+		RAID_BOSS_DATE_FORMAT = custom.getProperty("RaidBossDateFormat", "MMM dd, HH:mm");
+		RAID_BOSS_IDS = custom.getProperty("RaidBossIds", "0,0");
+		LIST_RAID_BOSS_IDS = new ArrayList<>();
+		for (String val : RAID_BOSS_IDS.split(","))
+		{
+			int npcId = Integer.parseInt(val);
+			LIST_RAID_BOSS_IDS.add(npcId);
+		}
+
 	}
 	
 	/**

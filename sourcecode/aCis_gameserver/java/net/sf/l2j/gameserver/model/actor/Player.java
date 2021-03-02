@@ -253,6 +253,13 @@ public final class Player extends Playable
 	private static final String UPDATE_TARGET_RECOM_HAVE = "UPDATE characters SET rec_have=? WHERE obj_Id=?";
 	private static final String UPDATE_CHAR_RECOM_LEFT = "UPDATE characters SET rec_left=? WHERE obj_Id=?";
 	
+	private boolean _cantGainXP = false;
+	private boolean _isPartyInvProt = false;
+	private boolean _isInTradeProt = false;
+	private boolean _isSSDisabled = false;
+	private boolean _isBuffProtected = false;
+	private boolean _isMessageRefusal = false;
+	
 	private static final String UPDATE_NOBLESS = "UPDATE characters SET nobless=? WHERE obj_Id=?";
 	
 	public static final int REQUEST_TIMEOUT = 15;
@@ -7400,17 +7407,77 @@ public final class Player extends Playable
 	}
 	
 
-   private long _offlineShopStart;
-   
-   public long getOfflineStartTime()
-   {
-       return _offlineShopStart;
-   }
-   
-   public void setOfflineStartTime(long time)
-   {
-       _offlineShopStart = time;
-   }
+	private long _offlineShopStart;
+	
+	public long getOfflineStartTime()
+	{
+		return _offlineShopStart;
+	}
+	
+	public void setOfflineStartTime(long time)
+	{
+		_offlineShopStart = time;
+	}
+	
+	public boolean isInTradeProt()
+	{
+		return _isInTradeProt;
+	}
+	
+	public void setIsInTradeProt(boolean value)
+	{
+		_isInTradeProt = value;
+	}
+	
+	public boolean isSSDisabled()
+	{
+		return _isSSDisabled;
+	}
+	
+	public void setIsSSDisabled(boolean value)
+	{
+		_isSSDisabled = value;
+	}
+	
+	public boolean isPartyInvProt()
+	{
+		return _isPartyInvProt;
+	}
+	
+	public void setIsPartyInvProt(boolean value)
+	{
+		_isPartyInvProt = value;
+	}
+	
+	public void cantGainXP(boolean b)
+	{
+		_cantGainXP = b;
+	}
+	
+	public boolean cantGainXP()
+	{
+		return _cantGainXP;
+	}
+	
+	public boolean isBuffProtected()
+	{
+		return _isBuffProtected;
+	}
+	
+	public void setIsBuffProtected(boolean value)
+	{
+		_isBuffProtected = value;
+	}
+	
+	public boolean getMessageRefusal()
+	{
+		return _isMessageRefusal;
+	}
+	
+	public void setMessageRefusal(boolean value)
+	{
+		_isMessageRefusal = value;
+	}
  
 	
 }

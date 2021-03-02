@@ -1,6 +1,7 @@
 package net.sf.l2j.gameserver;
 
 import java.io.File;
+import net.sf.l2j.gameserver.model.World;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -81,8 +82,8 @@ import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.handler.TargetHandler;
 import net.sf.l2j.gameserver.handler.UserCommandHandler;
+import net.sf.l2j.gameserver.handler.voicedcommandhandlers.VoicedCommandHandler;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
-import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.boat.BoatGiranTalking;
 import net.sf.l2j.gameserver.model.boat.BoatGludinRune;
 import net.sf.l2j.gameserver.model.boat.BoatInnadrilTour;
@@ -177,6 +178,8 @@ public class GameServer
 		AdminData.getInstance();
 		BookmarkTable.getInstance();
 		PetitionManager.getInstance();
+		VoicedCommandHandler.getInstance();
+
 		
 		StringUtil.printSection("Characters");
 		
@@ -343,4 +346,9 @@ public class GameServer
 	{
 		return _selectorThread;
 	}
+	
+	public static int getAllPlayers() {
+		return World.getInstance().getPlayers().size();
+	}
+		
 }
