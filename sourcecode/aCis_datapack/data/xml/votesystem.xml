@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<votesite name="l2.topgameserver.net" ordinal="0">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="ItopZ.com" ordinal="1">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="L2Top.co" ordinal="2">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="L2Votes.com" ordinal="3">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="Hopzone.net" ordinal="4">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="L2Network.eu" ordinal="5">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="L2Topservers.com" ordinal="6">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="top.l2jbrasil.com" ordinal="7">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="MMOTOP.eu" ordinal="8">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="L2Topzone.com" ordinal="9">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="L2Servers.com" ordinal="10">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+	<votesite name="globalVotes" ordinal="11">
+		<items>
+		<item itemId="57" itemCount="10000000" />
+		<item itemId="6673" itemCount="1"/>
+		</items>
+	</votesite>
+</list>

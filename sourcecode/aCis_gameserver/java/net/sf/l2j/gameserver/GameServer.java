@@ -101,6 +101,8 @@ import net.sf.l2j.gameserver.taskmanager.PvpFlagTaskManager;
 import net.sf.l2j.gameserver.taskmanager.RandomAnimationTaskManager;
 import net.sf.l2j.gameserver.taskmanager.ShadowItemTaskManager;
 import net.sf.l2j.gameserver.taskmanager.WaterTaskManager;
+import net.sf.l2j.gameserver.votesystem.Handler.voteManager;
+import net.sf.l2j.gameserver.votesystem.VoteUtil.VoteSiteXml;
 import net.sf.l2j.util.DeadLockDetector;
 import net.sf.l2j.util.IPv4Filter;
 import net.sf.l2j.gameserver.data.sql.OfflineTradersTable;
@@ -197,6 +199,15 @@ public class GameServer
 		
 		StringUtil.printSection("Clans");
 		ClanTable.getInstance();
+
+		StringUtil.printSection("Vote System");
+		if(Config.ENABLE_VOTE_SYSTEM) {
+			voteManager.getInatance();
+			LOGGER.info("======================Vote System Enabled=========================");
+			VoteSiteXml.getInstance();
+		} else {
+			LOGGER.info("======================Vote System Disabled=========================");
+		}
 		
 		StringUtil.printSection("Geodata & Pathfinding");
 		GeoEngine.getInstance();

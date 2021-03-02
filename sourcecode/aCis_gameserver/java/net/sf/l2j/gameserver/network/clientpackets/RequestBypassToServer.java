@@ -116,7 +116,23 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				
 				ach.useVoicedCommand(_command.substring(7), player);
 			}
-		
+		else if(_command.startsWith("vote_")) {
+			if (!player.validateBypass(_command))
+				return;
+			
+			int endOfId = _command.indexOf('_', 6);
+			String id;
+			if (endOfId > 0)
+				id = _command.substring(5, endOfId);
+			else
+				id = _command.substring(5);
+			
+			if(_command.split(" ")[1].toString() != null) {
+				final WorldObject object = World.getInstance().getObject(Integer.parseInt(id));
+				if (object instanceof Npc && endOfId > 0 && player.getAI().canDoInteract(object))
+					((Npc) object).onBypassFeedback(player, _command.substring(endOfId + 1));
+			}
+		}
 		else if (_command.startsWith("npc_"))
 		{
 			if (!player.validateBypass(_command))
