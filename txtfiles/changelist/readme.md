@@ -17,3 +17,7 @@ Added Auto Potions(client side)
 Permit Augment Weapons to be traded
 
 NPC available Buffs duration changed to 2h
+
+Added  Character Settings .menu
+
+Added Vote System w/ API

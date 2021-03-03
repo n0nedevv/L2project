@@ -34,6 +34,12 @@ public class ChatTell implements IChatHandler
 			return;
 		}
 		
+		if (targetPlayer.getMessageRefusal())
+		{
+			player.sendMessage("You can't invite that player because he is in Message Refusal protection.");
+			return;
+		}
+		
 		if (!player.isGM())
 		{
 			if (targetPlayer.getBlockList().isBlockingAll())

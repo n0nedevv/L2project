@@ -72,6 +72,10 @@ public class Continuous implements ISkillHandler
 					if (target.getFirstEffect(EffectType.BLOCK_BUFF) != null)
 						continue;
 					
+					if(target instanceof Player)
+						if(target.getActingPlayer().isBuffProtected())
+							continue;
+					
 					// Player holding a cursed weapon can't be buffed and can't buff
 					if (!(activeChar instanceof ClanHallManagerNpc) && target != activeChar)
 					{
