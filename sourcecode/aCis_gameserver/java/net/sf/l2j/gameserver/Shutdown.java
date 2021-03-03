@@ -28,6 +28,7 @@ import net.sf.l2j.gameserver.network.gameserverpackets.ServerStatus;
 import net.sf.l2j.gameserver.network.serverpackets.ServerClose;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.taskmanager.ItemsOnGroundTaskManager;
+import net.sf.l2j.gameserver.votesystem.Handler.voteManager;
 
 /**
  * This class provides functions for shutting down and restarting the server. It closes all client connections and saves data.
@@ -164,6 +165,10 @@ public class Shutdown extends Thread
 				CoupleManager.getInstance().save();
 				LOGGER.info("CoupleManager data has been saved.");
 			}
+
+			//Save global and individual votes
+			voteManager.getInatance().Shutdown();
+			LOGGER.info("Vote data has been saved");
 			
 			// Save items on ground before closing
 			ItemsOnGroundTaskManager.getInstance().save();
