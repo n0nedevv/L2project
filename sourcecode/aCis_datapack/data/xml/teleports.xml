@@ -1681,4 +1681,15 @@
 		<loc desc="Rune Township" type="CHF_LEVEL_2" priceId="57" priceCount="500" x="43835" y="-47688" z="-792" castleId="8" />
 		<loc desc="Town of Aden" type="CHF_LEVEL_2" priceId="57" priceCount="500" x="146705" y="25840" z="-2000" castleId="5" />
 	</telPosList>
+	<telPosList npcId="50012">
+		<loc desc="The Town of Giran" type="STANDARD" priceId="57" priceCount="13000" x="83314" y="148012" z="-3400" castleId="3" />
+		<loc desc="Town of Aden" type="STANDARD" priceId="57" priceCount="5900" x="146705" y="25840" z="-2000" castleId="5" />
+		<loc desc="Town of Goddard" type="STANDARD" priceId="57" priceCount="71000" x="148024" y="-55281" z="-2728" castleId="7" />
+		<loc desc="Town of Schuttgart" type="STANDARD" priceId="57" priceCount="88000" x="87478" y="-142297" z="-1352" castleId="9" />
+		<loc desc="Heine" type="STANDARD" priceId="57" priceCount="12000" x="111455" y="219400" z="-3546" castleId="6" />
+		<loc desc="Town of Oren" type="STANDARD" priceId="57" priceCount="33000" x="83011" y="53207" z="-1470" castleId="4" />
+		<loc desc="The Town of Dion" type="STANDARD" priceId="57" priceCount="6800" x="15671" y="142994" z="-2704" castleId="2" />
+		<loc desc="The Town of Gludio" type="STANDARD" priceId="57" priceCount="3400" x="-12787" y="122779" z="-3114" castleId="1" />
+		<loc desc="Rune Township" type="STANDARD" priceId="57" priceCount="57000" x="43835" y="-47749" z="-792" castleId="8" />
+	</telPosList>	
 </list>
