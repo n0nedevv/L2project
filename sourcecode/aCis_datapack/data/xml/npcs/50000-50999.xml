@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <list>
-	<npc id="50006" idTemplate="31228" name="Roy the Cat" title="Class Manager">
+	<npc id="50006" idTemplate="31228" name="Class Manager" title="L2project">
 		<set name="usingServerSideName" val="true"/>
 		<set name="usingServerSideTitle" val="true"/>
 		<set name="level" val="70"/>
@@ -37,7 +37,7 @@
 			<skill id="4416" level="7"/>
 		</skills>
 	</npc>
-	<npc id="50007" idTemplate="31324" name="Andromeda" title="Wedding Manager">
+	<npc id="50007" idTemplate="31324" name="Wedding Manager" title="L2project">
 		<set name="usingServerSideName" val="true"/>
 		<set name="usingServerSideTitle" val="true"/>
 		<set name="level" val="70"/>
@@ -74,7 +74,7 @@
 			<skill id="4416" level="16"/>
 		</skills>
 	</npc>
-	<npc id="50008" idTemplate="31360" name="Kaley" title="Buffer">
+	<npc id="50008" idTemplate="31360" name="Buffer" title="L2project">
         <set name="usingServerSideName" val="true"/>
         <set name="usingServerSideTitle" val="true"/>
         <set name="level" val="70"/>
@@ -110,11 +110,8 @@
             <skill id="4045" level="1"/>
             <skill id="4416" level="18"/>
         </skills>
-<<<<<<< Updated upstream
-    </npc>
-=======
    </npc>
-	<npc id="50009" idTemplate="30519" name="Kaaya" title="Vote System">
+	<npc id="50009" idTemplate="30519" name="Vote System" title="L2project">
 		<set name="usingServerSideName" val="true"/>
 		<set name="usingServerSideTitle" val="true"/>
 		<set name="level" val="70"/>
@@ -151,13 +148,15 @@
 			<skill id="4416" level="18"/>
 		</skills>
 	</npc>
-		<npc id="50010" idTemplate="31862" name="Crystal" title="Gatekeeper">
-		<set name="level" val="70"/>
-		<set name="radius" val="7"/>
-		<set name="height" val="40"/>
+	<npc id="50012" idTemplate="32090" name="Gatekeeper" title="L2project">
+		<set name="usingServerSideName" val="true"/>
+		<set name="usingServerSideTitle" val="true"/>
+		<set name="level" val="80"/>
+		<set name="radius" val="8"/>
+		<set name="height" val="22"/>
 		<set name="rHand" val="0"/>
 		<set name="lHand" val="0"/>
-		<set name="type" val="L2Teleporter"/>
+		<set name="type" val="Gatekeeper"/>
 		<set name="exp" val="0"/>
 		<set name="sp" val="0"/>
 		<set name="hp" val="2444.46819"/>
@@ -186,5 +185,4 @@
 			<skill id="4416" level="18"/>
 		</skills>
 	</npc>
->>>>>>> Stashed changes
 </list>

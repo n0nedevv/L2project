@@ -1691,5 +1691,7 @@
 		<loc desc="The Town of Dion" type="STANDARD" priceId="57" priceCount="6800" x="15671" y="142994" z="-2704" castleId="2" />
 		<loc desc="The Town of Gludio" type="STANDARD" priceId="57" priceCount="3400" x="-12787" y="122779" z="-3114" castleId="1" />
 		<loc desc="Rune Township" type="STANDARD" priceId="57" priceCount="57000" x="43835" y="-47749" z="-792" castleId="8" />
+		<loc desc="Giran Harbor" type="STANDARD" priceId="57" priceCount="7100" x="47935" y="186810" z="-3420" castleId="3" />
+		<loc desc="Coliseum" type="NOBLE_HUNTING_ZONE_ADENA" priceId="57" priceCount="1000" x="146440" y="46723" z="-3400" />
 	</telPosList>	
 </list>
