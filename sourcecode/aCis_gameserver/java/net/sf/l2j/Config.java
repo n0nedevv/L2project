@@ -37,6 +37,7 @@ public final class Config
 	public static final String PLAYERS_FILE = "./config/players.properties";
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
+	public static final String VOTE_SYSTEM_FILE = "./config/votesystem.properties";
 	public static final String OFFLINE_FILE = "./config/offlineshop.properties";
 	public static final String CUSTOM_FILE = "./config/custom.properties";
 	
@@ -487,6 +488,51 @@ public final class Config
 	
 	public static int CH_MINIMUM_CLAN_LEVEL;
 	public static int CH_MAX_ATTACKERS_NUMBER;
+
+	//---------------------------------------------------
+	// VOTE SYSTEM
+	//---------------------------------------------------
+	public static boolean ENABLE_VOTE_SYSTEM;
+	public static boolean ENABLE_INDIVIDUAL_VOTE;
+	public static boolean ENABLE_GLOBAL_VOTE;
+	public static int NEXT_TIME_TO_AUTO_UPDATE_TOTAL_VOTE;
+	public static int NEXT_TIME_TO_AUTO_UPDATE_INDIVIDUAL_VOTES;
+	public static int NEXT_TIME_TO_AUTO_CLEAN_INECESARY_VOTES;
+	public static int NEXT_TIME_TO_CHECK_AUTO_GLOBAL_VOTES_REWARD;
+	public static int INTERVAL_TO_NEXT_VOTE;
+	public static int GLOBAL_VOTES_AMOUNT_TO_NEXT_REWARD;
+	public static boolean ENABLE_VOTING_COMMAND; 
+	public static String VOTING_COMMAND;
+	public static String VOTE_LINK_TGS;
+	public static String TGS_API_KEY;
+	public static String VOTE_LINK_TOP_CO;
+	public static String TOP_CO_SRV_ID;
+	public static String VOTE_LINK_ITOPZ;
+	public static String ITOPZ_API_KEY;
+	public static String ITOPZ_SRV_ID;
+	public static String VOTE_LINK_VTS;
+	public static String VTS_API_KEY;
+	public static String VTS_SID;
+	public static String VOTE_LINK_HZ;
+	public static String HZ_API_KEY;
+	public static String VOTE_NETWORK_LINK;
+	public static String VOTE_NETWORK_USER_NAME;
+	public static String VOTE_NETWORK_API_KEY;
+	public static String VOTE_LINK_TSS;
+	public static String TSS_API_TOKEN;
+    public static String TS_SRV_ID;
+    public static String TS_DOMAIN_NAME;
+	public static String BRASIL_VOTE_LINK;
+	public static String BRASIL_USER_NAME;
+	public static String VOTE_LINK_MMOTOP;
+	public static String MMOTOP_API_KEY;
+	public static String VOTE_LINK_TZ;
+	public static String TZ_API_KEY;
+	public static String VOTE_LINK_SERVERS;
+	public static String SERVERS_HASH_CODE;
+	public static String SERVERS_SRV_ID;
+    public static String TEST_IP;
+        
 	
 	// --------------------------------------------------
 	// Server
@@ -1223,6 +1269,53 @@ public final class Config
 		
 		CH_MINIMUM_CLAN_LEVEL = sieges.getProperty("ChSiegeClanMinLevel", 4);
 		CH_MAX_ATTACKERS_NUMBER = sieges.getProperty("ChAttackerMaxClans", 10);
+		
+	}
+
+	private static final void loadVoteSystem() 
+	{
+		final ExProperties votesystem = initProperties(Config.VOTE_SYSTEM_FILE);
+		
+		ENABLE_VOTE_SYSTEM = votesystem.getProperty("EnableVoteSystem", true);
+		ENABLE_INDIVIDUAL_VOTE = votesystem.getProperty("EnableIndividualVote", true);
+		ENABLE_GLOBAL_VOTE = votesystem.getProperty("EnableGlobalVote", true);
+		NEXT_TIME_TO_AUTO_UPDATE_TOTAL_VOTE = votesystem.getProperty("NextTimeToAutoUpdateTotalVote", 60)*60*1000; // -> minutes
+		NEXT_TIME_TO_AUTO_UPDATE_INDIVIDUAL_VOTES = votesystem.getProperty("NextTimeToAutoUpdateIndividualVotes", 60)*60*1000; // -> minutes
+		NEXT_TIME_TO_AUTO_CLEAN_INECESARY_VOTES = votesystem.getProperty("NextTimeToAutoCleanInnecesaryVotes", 30)*60*1000; // -> minutes
+		NEXT_TIME_TO_CHECK_AUTO_GLOBAL_VOTES_REWARD = votesystem.getProperty("NextTimeToCheckAutoGlobalVotesReward", 5)*60*1000; // -> minutes
+		INTERVAL_TO_NEXT_VOTE = votesystem.getProperty("IntervalTimeToNextVote", 12)*3600*1000; // -> hours
+		GLOBAL_VOTES_AMOUNT_TO_NEXT_REWARD = votesystem.getProperty("GlobalVotesAmountToNextReward",50);
+		ENABLE_VOTING_COMMAND = votesystem.getProperty("EnableVotingCommand",true);
+		VOTING_COMMAND = votesystem.getProperty("VotingCommand","getreward");
+		VOTE_LINK_TGS = votesystem.getProperty("VoteLinkTgs","");
+		TGS_API_KEY = votesystem.getProperty("TgsApiKey","");
+		VOTE_LINK_TOP_CO = votesystem.getProperty("VoteLinkTopCo","");
+		TOP_CO_SRV_ID = votesystem.getProperty("TopCoSrvId","");
+		VOTE_LINK_ITOPZ = votesystem.getProperty("VoteLinkItopz","");
+		ITOPZ_API_KEY = votesystem.getProperty("ItopzZpiKey","");
+		ITOPZ_SRV_ID = votesystem.getProperty("ItopzSrvId","");
+		VOTE_LINK_VTS = votesystem.getProperty("VoteLinkVts","");
+		VTS_API_KEY = votesystem.getProperty("VtsApiKey","");
+		VTS_SID = votesystem.getProperty("VtsSid","");
+		VOTE_LINK_HZ = votesystem.getProperty("VoteLinkHz","");
+		HZ_API_KEY = votesystem.getProperty("HzApiKey","");
+		VOTE_NETWORK_LINK = votesystem.getProperty("VoteNetworkLink","");
+		VOTE_NETWORK_USER_NAME = votesystem.getProperty("VoteNetworkUserName","");
+		VOTE_NETWORK_API_KEY = votesystem.getProperty("VoteNetworkApiKey","");
+		VOTE_LINK_TSS = votesystem.getProperty("VoteLinkTss","");
+		TSS_API_TOKEN = votesystem.getProperty("TssApiToken","");
+        TS_SRV_ID = votesystem.getProperty("TsSrvId","");
+        TS_DOMAIN_NAME = votesystem.getProperty("TsDomainName","");
+		BRASIL_VOTE_LINK = votesystem.getProperty("BrasilVoteLink","");
+		BRASIL_USER_NAME = votesystem.getProperty("BrasilUserName","");
+		VOTE_LINK_MMOTOP = votesystem.getProperty("VoteLinkMmotop","");
+		MMOTOP_API_KEY = votesystem.getProperty("MmotopApiKey","");
+		VOTE_LINK_TZ = votesystem.getProperty("VoteLinkTz","");
+		TZ_API_KEY = votesystem.getProperty("TzApiKey","");
+		VOTE_LINK_SERVERS = votesystem.getProperty("VoteLinkServers","");
+		SERVERS_HASH_CODE = votesystem.getProperty("ServersHashCode","");
+		SERVERS_SRV_ID = votesystem.getProperty("ServersSrvId","");
+        TEST_IP = votesystem.getProperty("TestIp","");
 	}
 	
 	/**
@@ -1427,6 +1520,9 @@ public final class Config
 		
 		// server settings
 		loadServer();
+
+		//vote settings
+		loadVoteSystem();
 		
 		
 	}
