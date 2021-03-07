@@ -148,7 +148,7 @@
 			<skill id="4416" level="18"/>
 		</skills>
 	</npc>
-	<npc id="50012" idTemplate="32090" name="Gatekeeper" title="L2project">
+	<npc id="50012" idTemplate="30146" name="Global Gatekeeper" title="L2project">
 		<set name="usingServerSideName" val="true"/>
 		<set name="usingServerSideTitle" val="true"/>
 		<set name="level" val="80"/>
