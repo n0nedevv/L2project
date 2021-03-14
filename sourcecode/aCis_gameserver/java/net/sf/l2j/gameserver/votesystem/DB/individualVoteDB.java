@@ -25,7 +25,6 @@ public class individualVoteDB
 	private static final Logger LOGGER = Logger.getLogger(individualVoteDB.class.getName());
 	private Map<String,individualVote[]> _votes;
 	private Statement st;
-	private Connection con;
 	
 	
 	private individualVoteDB() {

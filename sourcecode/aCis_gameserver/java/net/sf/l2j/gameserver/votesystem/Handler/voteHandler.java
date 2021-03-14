@@ -165,7 +165,6 @@ public class voteHandler {
 					response = getResponse(getIndividualUrl(ordinal,ip,null),ordinal);
 					isVoted = (VoteUtil.between("\"status\":\"", response, "\",\"date\"") != "" && Integer.parseInt(VoteUtil.between("\"status\":\"", response, "\",\"date\"")) == 1) ?  true : false;
 					if(isVoted) {
-							String dateString = VoteUtil.between("\"date\":\"", response, "\"}]");
 							try
 							{
 								voteSiteTime = System.currentTimeMillis();

@@ -43,9 +43,11 @@ import net.sf.l2j.gameserver.data.manager.RaidBossManager;
 import net.sf.l2j.gameserver.data.manager.RaidPointManager;
 import net.sf.l2j.gameserver.data.manager.SevenSignsManager;
 import net.sf.l2j.gameserver.data.manager.ZoneManager;
+import net.sf.l2j.gameserver.data.sql.AuctionTable;
 import net.sf.l2j.gameserver.data.sql.AutoSpawnTable;
 import net.sf.l2j.gameserver.data.sql.BookmarkTable;
 import net.sf.l2j.gameserver.data.sql.ClanTable;
+import net.sf.l2j.gameserver.data.sql.IconsTable;
 import net.sf.l2j.gameserver.data.sql.PlayerInfoTable;
 import net.sf.l2j.gameserver.data.sql.ServerMemoTable;
 import net.sf.l2j.gameserver.data.xml.SkipData;
@@ -162,6 +164,7 @@ public class GameServer
 		SkillTreeData.getInstance();
 		
 		StringUtil.printSection("Items");
+		IconsTable.getInstance();
 		ItemData.getInstance();
 		SummonItemData.getInstance();
 		HennaData.getInstance();
@@ -184,7 +187,7 @@ public class GameServer
 
 		
 		StringUtil.printSection("Characters");
-		
+		AuctionTable.getInstance();
 		if ((Config.OFFLINE_TRADE_ENABLE || Config.OFFLINE_CRAFT_ENABLE) && Config.RESTORE_OFFLINERS)
 			OfflineTradersTable.restoreOfflineTraders();
 		

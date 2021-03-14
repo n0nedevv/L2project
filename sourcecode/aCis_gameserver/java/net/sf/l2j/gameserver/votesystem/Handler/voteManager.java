@@ -32,7 +32,6 @@ public final class voteManager extends voteHandler{
 	private ScheduledFuture<?> _updateIndividualVotes;
 	private ScheduledFuture<?> _autoGlobalVotesReward;
 	
-	private HashSet<individualVote> _votes;
 	private Map<String,individualVote[]> _foundVoters;
 	private globalVote[] _globalVotes = new globalVote[voteSite.values().length];
 	
@@ -133,7 +132,7 @@ public final class voteManager extends voteHandler{
 		return false;
 	}
 	
-	public long getTimeRemaining(individualVote iv) {
+	public static long getTimeRemaining(individualVote iv) {
 		long timeRemaining = 0L;
 			timeRemaining = (iv.getVotingTimeSite() + Config.INTERVAL_TO_NEXT_VOTE - (iv.getDiffTime()>0? iv.getDiffTime() : -1*iv.getDiffTime())) -System.currentTimeMillis();
 		return timeRemaining;
@@ -156,7 +155,7 @@ public final class voteManager extends voteHandler{
 		return timeRemainingWithSampleFormat;
 	}
 	
-	public String CalculateTimeRemainingWithSampleDateFormat(long timeRemaining) {
+	public static String CalculateTimeRemainingWithSampleDateFormat(long timeRemaining) {
 		long t = timeRemaining/1000;
 		int hours = Math.round((t/3600%24));
 		 int minutes = Math.round((t/60)%60);
@@ -164,6 +163,7 @@ public final class voteManager extends voteHandler{
 		 return String.format("%sH:%sm:%ss", hours,minutes,seconds);
 	}
 	
+	@SuppressWarnings("static-method")
 	public String existIp(Player p) {
 		 
 		 GameClient client = p.getClient();

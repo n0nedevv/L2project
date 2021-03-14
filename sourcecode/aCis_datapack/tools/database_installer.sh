@@ -143,6 +143,7 @@ $MYG < ../sql/seven_signs_status.sql &> /dev/null
 $MYG < ../sql/siege_clans.sql &> /dev/null
 $MYG < ../sql/spawnlist_4s.sql &> /dev/null
 $MYG < ../sql/spawnlist.sql &> /dev/null
+$MYG < ../sql/custom/auction_table.sql &> /dev/null
 echo ""
 echo "Was fast, isn't it ?"
 }
