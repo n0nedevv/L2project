@@ -6,25 +6,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
- 
+import java.util.Map.Entry;
+
 import net.sf.l2j.commons.lang.StringUtil;
 import net.sf.l2j.commons.pool.ConnectionPool;
 
 import net.sf.l2j.gameserver.data.sql.AuctionTable;
 import net.sf.l2j.gameserver.data.sql.IconsTable;
 import net.sf.l2j.gameserver.data.xml.ItemData;
+import net.sf.l2j.gameserver.enums.actors.OperateType;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.auction.AuctionItem;
 import net.sf.l2j.gameserver.model.World;
+import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Player;
 import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
+import net.sf.l2j.gameserver.model.item.kind.Item;
+import net.sf.l2j.gameserver.model.trade.TradeItem;
 import net.sf.l2j.gameserver.network.serverpackets.InventoryUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
+import net.sf.l2j.gameserver.network.serverpackets.TeleportToLocation;
 
 /**
- * @author Anarchy
+ * @author n0nedevv
  *
  */
 public class AuctionManager extends Folk
@@ -187,6 +194,77 @@ public class AuctionManager extends Folk
 			player.sendMessage("You have removed an item from the Auction Shop.");
 			showChatWindow(player);
 		}
+		else if (command.startsWith("offlinebuy"))
+		{
+			try
+			{
+				//String[] data = command.substring(8).split(" - ");
+				int page = 1;
+				String search = "";
+				showOfflineBuy(player, page, search);
+			}
+			catch (Exception e)
+			{
+				showChatWindow(player);
+				player.sendMessage("Invalid input. Please try again.");
+				return;
+			}
+		}
+		else if (command.startsWith("offlinesell"))
+		{
+			try
+			{
+				//String[] data = command.substring(8).split(" - ");
+				int page = 1;
+				String search = "";
+				showOfflineSell(player, page, search);
+			}
+			catch (Exception e)
+			{
+				showChatWindow(player);
+				player.sendMessage("Invalid input. Please try again.");
+				return;
+			}
+		}
+		else if (command.startsWith("teleport"))
+		{
+			Connection con = null;
+			try {
+				con = ConnectionPool.getConnection();
+				PreparedStatement select = con.prepareStatement("SELECT owner_id FROM items WHERE object_id=?");
+				
+				select.setInt(1, World.getInstance().getObject(Integer.parseInt(command.substring(9))).getObjectId());
+				try (ResultSet rs = select.executeQuery())
+			    {
+					if(rs.next()) {
+						Player owner = World.getInstance().getPlayer(Integer.parseInt(rs.getString(1)));                 
+						player.teleportTo(owner.getX(), owner.getY(), owner.getZ(), 0); 
+					}
+			    }
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+			catch (Exception e) {
+				try
+				{
+					con.close();
+				}
+				catch (SQLException e1)
+				{
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		else
 		{
 			super.onBypassFeedback(player, command);
@@ -472,6 +550,210 @@ public class AuctionManager extends Folk
 		htm.setHtml(html);
 		player.sendPacket(htm);
 	}
+	
+	private void showOfflineBuy(Player player, int page, String search)
+	{
+		boolean src = !search.equals("*null*");
+		 
+		HashMap<Integer, List<TradeItem>> items = new HashMap<>();
+		int curr = 1; //curr pagina (?)
+		int counter = 0;
+		
+		ArrayList<TradeItem> temp = new ArrayList<>();
+		for (Map.Entry<Player, List<TradeItem>> entry : getItemsBuyShops().entrySet())
+		{
+			for(TradeItem item : entry.getValue()) {
+				if(entry.getKey().getObjectId() != player.getObjectId() && (!src || (src && item.getItem().getName().contains(search)))) 
+				{
+					temp.add(item);
+					counter ++;
+					
+					if (counter == 10)
+					{
+						items.put(curr, temp);
+						temp = new ArrayList<>();
+						curr++;
+						counter = 0;
+					}
+				}
+			}
+			
+		}
+		items.put(curr, temp);
+ 
+		if (!items.containsKey(page))
+		{
+			showChatWindow(player);
+			player.sendMessage("Invalid page. Please try again.");
+			return;
+		}
+ 
+		String html = "<html><title>Auction Shop</title><body><center><br1>";
+		html += "<multiedit var=srch width=150 height=20><br1>";
+		html += "<button value=\"Search\" action=\"bypass -h npc_"+getObjectId()+"_auction 1 - $srch\" width=70 height=21 back=\"L2UI.DefaultButton_click\" fore=\"L2UI.DefaultButton\">";
+		html += "<br><table width=310 bgcolor=000000 border=1>";
+		html += "<tr><td>Item</td><td>Cost</td><td></td></tr>";
+		for (TradeItem item : items.get(page))
+		{	
+			html += "<tr>";
+			html += "<td><img src=\""+IconsTable.getInstance().getIcon(item.getItem().getItemId())+"\" width=32 height=32 align=center></td>";
+			html += "<td>Item: "+(item.getEnchant() > 0 ? "+"+item.getEnchant()+" "+ItemData.getInstance().getTemplate(item.getItem().getItemId()).getName()+" - "+item.getCount() : ItemData.getInstance().getTemplate(item.getItem().getItemId()).getName()+" - "+item.getCount());
+			html += "<br1>Cost: "+StringUtil.formatNumber(item.getPrice())+" "+ItemData.getInstance().getTemplate(item.getItem().getItemId()).getName();
+			html += "</td>";
+			html += "<td fixwidth=71><button value=\"Go to\" action=\"bypass -h npc_"+getObjectId()+"_teleport " +item.getObjectId() + "\" width=70 height=21 back=\"L2UI.DefaultButton_click\" fore=\"L2UI.DefaultButton\">";
+			html += "</td></tr>";
+		}
+		html += "</table><br><br>";
+ 
+		html += "Page: "+page;
+		html += "<br1>";
+ 
+		if (items.keySet().size() > 1)
+		{
+			if (page > 1)
+				html += "<a action=\"bypass -h npc_"+getObjectId()+"_auction "+(page-1)+" - "+search+"\"><- Prev</a>";
+ 
+			if (items.keySet().size() > page)
+				html += "<a action=\"bypass -h npc_"+getObjectId()+"_auction "+(page+1)+" - "+search+"\">Next -></a>";
+		}
+ 
+		html += "</center></body></html>";
+ 
+		NpcHtmlMessage htm = new NpcHtmlMessage(getObjectId());
+		htm.setHtml(html);
+		player.sendPacket(htm);
+	}
+	
+	
+	private void showOfflineSell(Player player, int page, String search)
+	{
+		boolean src = !search.equals("*null*");
+		 
+		HashMap<Integer, List<TradeItem>> items = new HashMap<>();
+		int curr = 1; //curr pagina (?)
+		int counter = 0;
+		
+		ArrayList<TradeItem> temp = new ArrayList<>();
+		for (Map.Entry<Player, List<TradeItem>> entry : getItemsSellShops().entrySet())
+		{
+			for(TradeItem item : entry.getValue()) {
+				if(entry.getKey().getObjectId() != player.getObjectId() && (!src || (src && item.getItem().getName().contains(search)))) 
+				{
+					temp.add(item);
+					counter ++;
+					
+					if (counter == 10)
+					{
+						items.put(curr, temp);
+						temp = new ArrayList<>();
+						curr++;
+						counter = 0;
+					}
+				}
+			}
+			
+		}
+		items.put(curr, temp);
+ 
+		if (!items.containsKey(page))
+		{
+			showChatWindow(player);
+			player.sendMessage("Invalid page. Please try again.");
+			return;
+		}
+ 
+		String html = "<html><title>Auction Shop</title><body><center><br1>";
+		html += "<multiedit var=srch width=150 height=20><br1>";
+		html += "<button value=\"Search\" action=\"bypass -h npc_"+getObjectId()+"_auction 1 - $srch\" width=70 height=21 back=\"L2UI.DefaultButton_click\" fore=\"L2UI.DefaultButton\">";
+		html += "<br><table width=310 bgcolor=000000 border=1>";
+		html += "<tr><td>Item</td><td>Cost</td><td></td></tr>";
+		for (TradeItem item : items.get(page))
+		{	
+			html += "<tr>";
+			html += "<td><img src=\""+IconsTable.getInstance().getIcon(item.getItem().getItemId())+"\" width=32 height=32 align=center></td>";
+			html += "<td>Item: "+(item.getEnchant() > 0 ? "+"+item.getEnchant()+" "+ItemData.getInstance().getTemplate(item.getItem().getItemId()).getName()+" - "+item.getCount() : ItemData.getInstance().getTemplate(item.getItem().getItemId()).getName()+" - "+item.getCount());
+			html += "<br1>Cost: "+StringUtil.formatNumber(item.getPrice())+" "+ItemData.getInstance().getTemplate(item.getItem().getItemId()).getName();
+			html += "</td>";
+			html += "<td fixwidth=71><button value=\"Go to\" action=\"bypass -h npc_"+getObjectId()+"_teleport " +item.getObjectId() + "\" width=70 height=21 back=\"L2UI.DefaultButton_click\" fore=\"L2UI.DefaultButton\">";
+			html += "</td></tr>";
+		}
+		html += "</table><br><br>";
+ 
+		html += "Page: "+page;
+		html += "<br1>";
+ 
+		if (items.keySet().size() > 1)
+		{
+			if (page > 1)
+				html += "<a action=\"bypass -h npc_"+getObjectId()+"_auction "+(page-1)+" - "+search+"\"><- Prev</a>";
+ 
+			if (items.keySet().size() > page)
+				html += "<a action=\"bypass -h npc_"+getObjectId()+"_auction "+(page+1)+" - "+search+"\">Next -></a>";
+		}
+ 
+		html += "</center></body></html>";
+ 
+		NpcHtmlMessage htm = new NpcHtmlMessage(getObjectId());
+		htm.setHtml(html);
+		player.sendPacket(htm);
+	}
+
+	
+	public static HashMap<Player, List<TradeItem>> getItemsBuyShops() 
+	{
+		HashMap<Player, List<TradeItem>> _map = new HashMap<>();
+		
+		for(final Player player : World.getInstance().getPlayers()) 
+		{
+			try 
+			{				
+				if(player.getOperateType() == OperateType.BUY) {
+					List<TradeItem> tmp = new ArrayList<>();
+					for (final TradeItem i : player.getBuyList())
+					{	
+						tmp.add(i);
+						
+					}
+					_map.put(player, tmp);										
+				}				
+			}
+			catch (final Exception e) {
+				
+			}
+		}
+		
+		return _map;
+	}
+	
+	
+	public static HashMap<Player, List<TradeItem>> getItemsSellShops() 
+	{
+		HashMap<Player, List<TradeItem>> _map = new HashMap<>();
+		
+		for(final Player player : World.getInstance().getPlayers()) 
+		{
+			try 
+			{				
+				if(player.getOperateType() == OperateType.SELL) {
+					List<TradeItem> tmp = new ArrayList<>();
+					for (final TradeItem i : player.getSellList())
+					{	
+						tmp.add(i);
+						
+						
+					}
+					_map.put(player, tmp);										
+				}				
+			}
+			catch (final Exception e) {
+				
+			}
+		}
+		
+		return _map;
+	}
+	
+	
 	
     @Override
 	public String getHtmlPath(int npcId, int val)
